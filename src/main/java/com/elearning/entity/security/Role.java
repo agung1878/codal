@@ -31,7 +31,7 @@ public class Role extends BaseEntity {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private UserType userType;
+    private UserType userType = UserType.MEMBER;
 
     @ManyToMany
     @OrderBy("permissionValue asc")
