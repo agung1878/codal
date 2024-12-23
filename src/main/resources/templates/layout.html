@@ -200,6 +200,10 @@
 
 <div th:insert="~{fragments/script :: script}" th:remove="tag">Script</div>
 <div layout:fragment="customScript" th:remove="tag"></div>
-
+<script>
+    function logoutFunction() {
+        document.getElementById('LOGOUT').submit();
+    }
+</script>
 </body>
 </html>

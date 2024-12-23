@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-xl-5 col-lg-6 col-md-7 col-sm-10 position-relative mx-auto">
                         <div class="auth-content py-md-0 py-8">
-                            <form class="w-100">
+                            <form class="w-100" method="post" th:action="@{/sign_up}" th:object="${registerDto}">
                                 <div class="row">
                                     <div class="col-lg-10 mx-auto">
                                         <h4 class="text-center mb-4">Sign Up to Jampack</h4>
@@ -102,26 +102,37 @@
                                         <div class="title-sm title-wth-divider divider-center my-4"><span>Or</span></div>
                                         <div class="row gx-3">
                                             <div class="form-group col-lg-6">
-                                                <label class="form-label">Name</label>
-                                                <input class="form-control" placeholder="Enter your name" value="" type="text">
+                                                <label class="form-label">First Name</label>
+                                                <input class="form-control" placeholder="Enter your first name" value="" type="text" th:field="*{firstName}">
                                             </div>
                                             <div class="form-group col-lg-6">
+                                                <label class="form-label">Last Name</label>
+                                                <input class="form-control" placeholder="Enter last name" value="" type="text" th:field="*{lastName}">
+                                            </div>
+                                            <div class="form-group col-lg-12">
                                                 <label class="form-label">Username</label>
-                                                <input class="form-control" placeholder="Enter username" value="" type="text">
+                                                <input class="form-control" placeholder="Enter your username id" value="" type="text" th:field="*{username}">
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label class="form-label">Email</label>
-                                                <input class="form-control" placeholder="Enter your email id" value="" type="text">
+                                                <input class="form-control" placeholder="Enter your email id" value="" type="email" th:field="*{email}">
+                                            </div>
+                                            <div class="form-group col-lg-12">
+                                                <label class="form-label">Country</label>
+                                                <select class="form-select" th:field="*{idCountry}">
+                                                    <option value="" disabled selected>Select a country</option>
+                                                    <option th:each="c : ${countries}" th:value="${c.id}" th:text="${c.name}"></option>
+                                                </select>
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label class="form-label">Phone Number</label>
-                                                <input class="form-control" placeholder="Enter your phone number" value="" type="number">
+                                                <input class="form-control" placeholder="Enter your phone number" value="" type="number" th:field="*{phoneNumber}">
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label class="form-label">Password</label>
                                                 <div class="input-group password-check">
 														<span class="input-affix-wrapper affix-wth-text">
-															<input class="form-control" placeholder="6+ characters" value="" type="password">
+															<input class="form-control" placeholder="6+ characters" value="" type="password" th:field="*{password}">
 															<a href="#" class="input-suffix text-primary text-uppercase fs-8 fw-medium">
 																<span>Show</span>
 																<span class="d-none">Hide</span>
@@ -147,7 +158,7 @@
                                             <input type="checkbox" class="form-check-input" id="logged_in" checked>
                                             <label class="form-check-label text-muted fs-8" for="logged_in">By creating an account you specify that you have read and agree with our <a href="#">Tearms of use</a> and <a href="#">Privacy policy</a>. We may keep you inform about latest updates through our default <a href="#">notification settings</a></label>
                                         </div>
-                                        <a href="#" class="btn btn-primary btn-rounded btn-uppercase btn-block">Create account</a>
+                                        <button type="submit" class="btn btn-primary btn-rounded btn-uppercase btn-block">Create account</button>
                                         <p class="p-xs mt-2 text-center">Already a member ? <a href="#"><u>Sign In</u></a></p>
                                     </div>
                                 </div>

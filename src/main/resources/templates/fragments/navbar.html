@@ -1,6 +1,6 @@
 <!-- navbar -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <body>
 <div th:fragment="navbar">
     <nav class="hk-navbar navbar navbar-expand-xl navbar-light fixed-top">
@@ -316,7 +316,9 @@
                                                 </div>
                                             </div>
                                             <div class="fs-7">contact@hencework.com</div>
-                                            <a href="#" class="d-block fs-8 link-secondary"><u>Sign Out</u></a>
+                                            <form th:action="@{/logout}" method="post" id="LOGOUT">
+                                                <a href="#" class="d-block fs-8 link-secondary" onclick="logoutFunction()"><u>Sign Out</u></a>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -68,19 +68,18 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/assets/**").permitAll()
+                        .requestMatchers("/sign_up/**").permitAll()
+                        .requestMatchers("/").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
                         .successHandler(customAuthenticationSuccessHandler())
-                )
-                .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
-                .logout(logout -> logout
-                        .logoutUrl("/logout") // Specify the logout URL (optional)
-                        .logoutSuccessUrl("/") // Redirect to "/" after logout
-                        .invalidateHttpSession(true) // Invalidate the session
-                        .deleteCookies("JSESSIONID") // Delete cookies
-                );;
+                ).logout(logout -> logout.deleteCookies("JSESSIONID")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .permitAll())
+                .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
 
         return http.build();
     }
@@ -96,7 +95,7 @@ public class SecurityConfiguration {
                         response.sendRedirect("/admin_panel/dashboard");
                         return;
                     } else if ("PERMISSION_MEMBER".equals(permission)) {
-                        response.sendRedirect("/feed");
+                        response.sendRedirect("/member/feed");
                         return;
                     }
                 }

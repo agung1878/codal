@@ -37,7 +37,8 @@ public class Member extends BaseEntity {
     @Size(max = 100, message = "Workplace must not exceed 100 characters")
     private String workPlace;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_country", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_member_country"))
     @NotNull(message = "Country cannot be null")
     private Country country;
 
@@ -47,6 +48,7 @@ public class Member extends BaseEntity {
     private List<Mutual> mutualLists = new ArrayList<>();
 
     @OneToOne
+    @JoinColumn(name = "id_user", nullable = false, columnDefinition = "varchar(36)")
     private User user;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)

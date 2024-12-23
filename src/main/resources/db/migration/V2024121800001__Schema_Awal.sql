@@ -85,13 +85,14 @@ create table group_membership
     modified_by     varchar(255),
     primary key (id)
 );
+
 create table member
 (
     created         timestamp(6),
     modified        timestamp(6),
-    country_id      varchar(36) not null unique,
     id              varchar(36) not null,
-    user_id         varchar(36) unique,
+    id_country      varchar(36) not null,
+    id_user         varchar(36) not null unique,
     first_name      varchar(50) not null,
     last_name       varchar(50) not null,
     work_place      varchar(100),
@@ -139,12 +140,12 @@ alter table if exists group_membership
     foreign key (member_id)
     references member;
 alter table if exists member
-    add constraint FKimgxpbvyco1xw2gw8nia3f9kv
-    foreign key (country_id)
+    add constraint fk_member_country
+    foreign key (id_country)
     references country;
 alter table if exists member
     add constraint FKjor6snhrwpvmkd0n3romup0sh
-    foreign key (user_id)
+    foreign key (id_user)
     references c_security_user;
 alter table if exists mutual
     add constraint FKkkq0um0licb7fllafkafdr6e2
